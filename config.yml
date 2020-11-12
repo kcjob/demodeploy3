@@ -1,0 +1,41 @@
+version: 2.1
+jobs:
+   configure_infra:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["ea:e6:7d:e2:c2:0a:9f:11:78:7c:63:c0:5b:c7:7e:3f"]
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory playbook.yml
+
+
+
+#  get_IP:
+#    docker:
+#      - image: amazon/aws-cli
+#    steps:
+#      - checkout
+#      - run:
+#         name: EC2 IP Addr 
+#         command: |
+#           aws ec2 describe-instances \
+#                         --filters "Name=key-name,Values=udacityDOkeypair" \
+#                         --query 'Reservations[*].Instances[*].PublicIpAddress' \
+#                         --output text  --region us-west-2
+#
+#           aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text --region us-west-2
+
+workflows:
+  my_workflow:
+    jobs:
+      - configure_infra
+#      - get_IP
+

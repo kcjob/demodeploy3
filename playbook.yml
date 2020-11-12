@@ -1,0 +1,7 @@
+---
+- name: "Configure EC2"
+  hosts: all
+  user: ubuntu
+  gather_facts: true
+  roles:
+    - configec2
