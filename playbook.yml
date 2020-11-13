@@ -4,6 +4,6 @@
   user: ubuntu
   gather_facts: true
   roles:
-    - print
-#    - configec2
+#    - print
+    - configec2
 
