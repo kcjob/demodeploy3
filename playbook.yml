@@ -1,6 +1,6 @@
 ---
 - name: "Configure EC2"
-  hosts: localhost #all
+  hosts: all
   user: ubuntu
   gather_facts: true
   roles:
